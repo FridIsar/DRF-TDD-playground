@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from todos.models import Todo
+from todos.models import Todo, Animal
 
 
 class TodoUserSerializer(serializers.ModelSerializer):
@@ -16,3 +16,9 @@ class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
         fields = ("user", "name", "done", "date_created")
+
+class AnimalSerializer(serializers.ModelSerializer):
+    
+        class Meta:
+            model = Animal
+            fields = ("name", "alive")

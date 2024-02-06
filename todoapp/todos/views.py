@@ -1,9 +1,9 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from todos.models import Todo
+from todos.models import Todo, Animal
 from todos.permissions import UserIsOwnerTodo
-from todos.serializers import TodoSerializer
+from todos.serializers import TodoSerializer, AnimalSerializer
 
 
 class TodoListCreateAPIView(ListCreateAPIView):
@@ -21,4 +21,10 @@ class TodoDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Todo.objects.all()
     permission_classes = (IsAuthenticated, UserIsOwnerTodo)
 
-
+class AnimalCreateAPIView(ListCreateAPIView):
+    serializer_class = AnimalSerializer
+    queryset = Animal.objects.all()
+    permission_classes = (IsAuthenticated)
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

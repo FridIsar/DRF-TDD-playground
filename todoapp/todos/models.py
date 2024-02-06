@@ -18,3 +18,14 @@ class Todo(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.name)
+
+class   Animal(models.Model):
+    alive = models.BooleanField(_("alive"), default=True)
+    name = models.CharField(_("Name"), max_length=255)
+
+    class Meta:
+        verbose_name = _("Animal")
+        verbose_name_plural = _("Animals")
+
+    def __unicode__(self):
+        return smart_unicode(self.name)
